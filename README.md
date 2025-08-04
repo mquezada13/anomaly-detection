@@ -18,13 +18,20 @@
 - The data is split with an 80/20 ratio, using `random_state=42` for reproducibility.
 ### Training
 - Model 1: Logistic Regresion. 
-        - This is using ` LogisticRegression()` from scikit-learn as our baseline model.
-        - We increase “max_iter= 10000` to ensure conversion.
-        - The model is evaluated using `accuracy_score`, `confusion_matrix`, `classification_report`
-        - Analyse the output: The model works but with low accurancy.
-             - Accuracy ≈ 0.9991 (misleading due to class imbalance)
-             - Precision (fraud class) ≈ 0.86
-             - Recall (fraud class) ≈ 0.57
-        - Although the model captures some fraudulent transactions, many are still missed. We will explore other techniques to improve recall.
+    - This is using ` LogisticRegression()` from scikit-learn as our baseline model.
+    - We increase “max_iter= 10000` to ensure conversion.
+    - The model is evaluated using `accuracy_score`, `confusion_matrix`, `classification_report`
+    - Analyse the output: The model works but with low accurancy.
+        - Accuracy ≈ 0.9991 (misleading due to class imbalance)
+        - Precision (fraud class) ≈ 0.86
+         - Recall (fraud class) ≈ 0.57
+- We then compute predicted probabilities for the positive class (fraud).
+- Using these probabilities, we generate the Precision-Recall curve and calculate the Area Under the Curve: **AUPRC = 0.7540**. On average, the model maintains 75% precision as recall increases.
+- To improve fraud detection, we manually lower the decision threshold to 0.3 and re-evaluate the model.
+    - This adjustment increases recall from 0.57 to 0.62, while slightly reducing precision from 0.86 to 0.81.
+     - A reasonable trade-off when detecting fraud is more critical than avoiding false positives.
+
+- Although the model captures many fraudulent transactions, others are still missed. We will explore additional models to improve performance, particularly recall.
+
 
 _(To be continued...)_
