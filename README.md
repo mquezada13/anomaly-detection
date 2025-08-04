@@ -41,6 +41,32 @@
     - The **AUPRC = 0.8613**, which is excellent for such a highly imbalanced classification problem.
     - The curve is more stable and flatter than in the logistic regression case, indicating more consistent confidence across thresholds.
     - Random Forest demonstrates higher performance and confidence when detecting fraud cases.
+- Model 3: XGBoost 
+    - We use XGBClassifier from the xgboost library, a gradient boosting technique known for its performance in real-world problems like fraud detection.
+    - We fit the model with n_estimators = 50, use_label_encoder=False, and eval_metric='logloss'.
+    - Model results:
+        - Accuracy: 0.99959
+        - Precision (fraud class): 0.96
+        - Recall (fraud class): 0.80
+        - **AUPRC: 0.8794** — better than both Logistic Regression and Random Forest.
+    - Although the recall is slightly lower than Random Forest, XGBoost maintains higher precision over a wider range of recall values, making it more reliable overall.
+    - The Precision-Recall curve is flatter and higher, indicating greater consistency across thresholds.
+    - XGBoost is widely used in real-life fraud detection due to its balance between performance and control.
+-  Model Comparison: Precision-Recall Curve Analysis
+ - M1 – Logistic Regression
+   - AUPRC ≈ 0.754 (initial), improved to 0.8742 with threshold tuning
+   - Performs well after adjusting the decision threshold, but its curve drops more sharply—precision decreases faster as recall increases.
+   - It is simple, fast, and interpretable, but not ideal for highly imbalanced data like fraud detection.
+ - M2 – Random Forest (50 trees)
+   - AUPRC ≈ 0.8613
+   - Offers a solid balance between precision and recall.
+   - The curve declines more gradually, indicating greater robustness as recall increases.
+   - Detects more fraud cases than logistic regression and has fewer false negatives.
 
+- M3 – XGBoost (50 trees)
+   - AUPRC ≈ 0.8742
+   - Shows the best overall performance, tied in AUPRC with the threshold-adjusted logistic regression but with significantly better classification metrics.
+   - Has the flattest curve until ~0.8 recall, meaning it maintains high precision even as recall increases.
+   - Detects the highest number of frauds (lowest false negatives).
 
 _(To be continued...)_
